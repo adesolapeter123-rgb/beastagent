@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beastagent | Invoice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">
+            <img src="./beast-agent-logo.svg" alt="Beastagent logo" />
+          </span>
+          <div>
+            <p class="brand-name">Beastagent</p>
+            <small>Fresh snacks delivered fast</small>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#menu">Menu</a>
+          <a href="index.html#delivery">Delivery</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="invoice-panel container">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Invoice</p>
+            <h1>Complete payment</h1>
+          </div>
+          <span class="status-badge status-pending">Payment required</span>
+        </div>
+
+        <div id="invoice-content" class="invoice-content">
+          <div class="invoice-card">
+            <div class="invoice-header">
+              <div>
+                <span class="small-label">Order ID</span>
+                <h2 id="order-id">--</h2>
+              </div>
+              <div class="text-right">
+                <span class="small-label">Date</span>
+                <p id="order-date">--</p>
+              </div>
+            </div>
+
+            <div id="invoice-items" class="invoice-items"></div>
+
+            <div class="invoice-summary">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <strong id="invoice-subtotal">₦0</strong>
+              </div>
+              <div class="summary-row">
+                <span>Delivery</span>
+                <strong id="invoice-delivery">₦0</strong>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <strong id="invoice-total">₦0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-card">
+            <div class="wallet-header">
+              <div class="wallet-logo">
+                <img src="./palmpay.jpg" alt="PalmPay logo" />
+              </div>
+              <div>
+                <h3>PalmPay</h3>
+                <small>Transfer to this account</small>
+              </div>
+            </div>
+
+            <div class="account-row">
+              <span>Account Number</span>
+              <strong id="pay-number">8078244793</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Account Name</span>
+              <strong id="pay-name">peter Adesola</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-actions">
+          <button id="sent-btn" class="primary-btn">Sent</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const formatMoney = (amount) => `₦${amount.toLocaleString()}`;
+
+      async function loadInvoice() {
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('orderId');
+
+        if (!orderId) {
+          document.getElementById('invoice-content').innerHTML = `
+            <div class="invoice-card empty-state">
+              <p>No order was found.</p>
+            </div>
+          `;
+          return;
+        }
+
+        try {
+          const response = await fetch(`/api/orders/${orderId}`);
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Unable to load invoice.');
+          }
+
+          document.getElementById('order-id').textContent = data.id.slice(0, 8).toUpperCase();
+          document.getElementById('order-date').textContent = new Date(data.createdAt).toLocaleString();
+          document.getElementById('invoice-subtotal').textContent = formatMoney(data.subtotal);
+          document.getElementById('invoice-delivery').textContent = formatMoney(data.delivery);
+          document.getElementById('invoice-total').textContent = formatMoney(data.total);
+
+          document.getElementById('invoice-items').innerHTML = data.items
+            .map(
+              (item) => `
+                <div class="invoice-row">
+                  <div>
+                    <strong>${item.name}</strong>
+                    <small>${item.qty} x ${formatMoney(item.price)}</small>
+                  </div>
+                  <span>${formatMoney(item.price * item.qty)}</span>
+                </div>
+              `
+            )
+            .join('');
+
+          document.getElementById('sent-btn').addEventListener('click', () => {
+            window.location.href = `receipt.html?orderId=${orderId}`;
+          });
+        } catch (error) {
+          document.getElementById('invoice-content').innerHTML = `
+            <div class="invoice-card empty-state">
+              <p>${error.message}</p>
+            </div>
+          `;
+        }
+      }
+
+      loadInvoice();
+    </script>
+  </body>
+</html>

@@ -13,16 +13,36 @@ const placeOrderBtn = document.getElementById('place-order');
 const menuItems = [];
 
 const snackVisuals = {
-  meatpie: { icon: '🥟', tag: 'Best seller', description: 'Flaky pastry filled with seasoned minced meat and vegetables.' },
-  puffpuff: { icon: '🍤', tag: '6 pieces', description: 'Soft, airy dough balls fried until golden and fluffy.' },
-  chinchin: { icon: '🥨', tag: 'Crunchy', description: 'Crispy fried pastry cubes, lightly sweetened.' },
+  meatpie: {
+    icon: `<img src="./meatpie.jpg" alt="Meat pie" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
+    tag: 'Best seller',
+    description: 'Flaky pastry filled with seasoned minced meat and vegetables.'
+  },
+  puffpuff: {
+    icon: `<img src="./puffpuff.jpg" alt="Puff puff" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
+    tag: '6 pieces',
+    description: 'Soft, airy dough balls fried until golden and fluffy.'
+  },
+  chinchin: {
+    icon: `<img src="./chinchin.jpg" alt="Chin chin" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
+    tag: 'Crunchy',
+    description: 'Crispy fried pastry cubes, lightly sweetened.'
+  },
   samosa: {
     icon: `<img src="./samosa.jpg" alt="Samosa" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
     tag: 'Savory',
     description: 'Crisp triangle pastry packed with spiced veg and meat.'
   },
-  donut: { icon: '🍩', tag: 'Sweet treat', description: 'Soft glazed donut with a classic sugar finish.' },
-  fishroll: { icon: '🐟', tag: 'Popular', description: 'Pastry roll wrapped around flaked, seasoned fish.' },
+  donut: {
+    icon: `<img src="./donut.jpg" alt="Donut" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
+    tag: 'Sweet treat',
+    description: 'Soft glazed donut with a classic sugar finish.'
+  },
+  fishroll: {
+    icon: `<img src="./fishroll.jpg" alt="Fish roll" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
+    tag: 'Popular',
+    description: 'Pastry roll wrapped around flaked, seasoned fish.'
+  },
   eggroll: {
     icon: `<img src="./egg roll.jpg" alt="Egg roll" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`,
     tag: 'Classic',
@@ -220,11 +240,13 @@ placeOrderBtn.addEventListener('click', async () => {
       throw new Error(data.error || 'Unable to place order.');
     }
 
-    orderMessageEl.textContent = `Order placed successfully! ID: ${data.id.slice(0, 8)}`;
+    orderMessageEl.textContent = `Order placed successfully! Redirecting to invoice...`;
     orderMessageEl.style.color = '#1e9b67';
 
     cart.length = 0;
     renderCart();
+
+    window.location.href = `invoice.html?orderId=${data.id}`;
   } catch (error) {
     orderMessageEl.textContent = error.message || 'Something went wrong while placing the order.';
     orderMessageEl.style.color = '#d9485f';
