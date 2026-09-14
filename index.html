@@ -88,15 +88,17 @@
             </div>
 
             <div class="hero-order-card">
-              <div>
+              <div class="combo-wrap">
                 <p>Combo box</p>
-                <h3>Family Snack Pack</h3>
+                <select id="best-seller-select" class="best-seller-select" aria-label="Choose a snack combo">
+                  <option value="">Loading snacks...</option>
+                </select>
               </div>
               <div class="price-wrap">
-                <span class="old-price">₦9,500</span>
-                <span class="new-price">₦7,800</span>
+                <span class="old-price">From</span>
+                <span id="best-seller-price" class="new-price">₦0</span>
               </div>
-              <button class="primary-btn hero-best-seller-btn" type="button" data-best-seller="meatpie">
+              <button class="primary-btn hero-best-seller-btn" type="button" data-best-seller="">
                 Order now
               </button>
             </div>

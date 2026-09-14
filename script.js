@@ -9,6 +9,9 @@ const totalEl = document.getElementById('total');
 const itemCountEl = document.getElementById('item-count');
 const orderMessageEl = document.getElementById('order-message');
 const placeOrderBtn = document.getElementById('place-order');
+const bestSellerSelect = document.getElementById('best-seller-select');
+const bestSellerPriceEl = document.getElementById('best-seller-price');
+const heroBestSellerBtn = document.querySelector('.hero-best-seller-btn');
 
 const menuItems = [];
 
@@ -80,6 +83,7 @@ async function loadMenu() {
     menuItems.length = 0;
     data.forEach((item) => menuItems.push(normalizeMenuItem(item)));
     renderMenu();
+    populateBestSellerOptions();
   } catch (error) {
     console.error('Menu load failed:', error);
     const fallback = [
@@ -95,6 +99,7 @@ async function loadMenu() {
     menuItems.length = 0;
     fallback.forEach((item) => menuItems.push(normalizeMenuItem(item)));
     renderMenu();
+    populateBestSellerOptions();
   }
 }
 
@@ -127,6 +132,36 @@ function renderMenu() {
   });
 }
 
+function populateBestSellerOptions() {
+  if (!bestSellerSelect) return;
+
+  if (menuItems.length === 0) {
+    bestSellerSelect.innerHTML = '<option value="">No snacks available</option>';
+    return;
+  }
+
+  bestSellerSelect.innerHTML = menuItems
+    .map(
+      (item) => `<option value="${item.id}">${item.name}</option>`
+    )
+    .join('');
+
+  const defaultItem = menuItems.find((item) => item.id === 'meatpie') || menuItems[0];
+  bestSellerSelect.value = defaultItem.id;
+  updateBestSellerPrice();
+}
+
+function updateBestSellerPrice() {
+  if (!bestSellerSelect || !bestSellerPriceEl || !heroBestSellerBtn) return;
+
+  const selectedItem = menuItems.find((item) => item.id === bestSellerSelect.value) || menuItems[0];
+
+  if (!selectedItem) return;
+
+  bestSellerPriceEl.textContent = formatMoney(selectedItem.price);
+  heroBestSellerBtn.dataset.bestSeller = selectedItem.id;
+}
+
 function addToCart(itemId) {
   const item = menuItems.find((entry) => entry.id === itemId);
   if (!item) return;
@@ -143,8 +178,10 @@ function addToCart(itemId) {
 }
 
 async function placeBestSellerOrder() {
+  const selectedItemId = heroBestSellerBtn?.dataset.bestSeller || bestSellerSelect?.value || 'meatpie';
+
   const payload = {
-    items: [{ id: 'meatpie', qty: 1 }],
+    items: [{ id: selectedItemId, qty: 1 }],
     customer: {
       name: 'Guest Customer',
       phone: '08000000000',
@@ -284,6 +321,10 @@ placeOrderBtn.addEventListener('click', async () => {
     orderMessageEl.style.color = '#d9485f';
   }
 });
+
+if (bestSellerSelect) {
+  bestSellerSelect.addEventListener('change', updateBestSellerPrice);
+}
 
 document.querySelectorAll('.hero-best-seller-btn').forEach((button) => {
   button.addEventListener('click', placeBestSellerOrder);

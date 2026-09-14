@@ -301,9 +301,26 @@ button:focus-visible,
   gap: 18px;
 }
 
+.combo-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
 .hero-order-card p {
   margin: 0;
   color: var(--muted);
+}
+
+.best-seller-select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  box-shadow: 0 10px 22px rgba(45, 31, 13, 0.06);
 }
 
 .hero-order-card h3 {
@@ -313,6 +330,7 @@ button:focus-visible,
 
 .price-wrap {
   text-align: right;
+  min-width: 92px;
 }
 
 .old-price {
