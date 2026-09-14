@@ -1,0 +1,9 @@
+[
+  { "id": "meatpie",  "name": "Meat pie",   "price": 800, "badge": "Best seller", "desc": "Flaky pastry, seasoned minced beef and diced veg inside." },
+  { "id": "puffpuff", "name": "Puff puff",  "price": 500, "badge": "6 pieces",    "desc": "Six sugar-dusted dough balls, fried golden and soft." },
+  { "id": "chinchin", "name": "Chin chin",  "price": 700, "desc": "Crunchy fried pastry cubes, lightly sweetened." },
+  { "id": "samosa",   "name": "Samosa",     "price": 600, "desc": "Crisp triangle pastry, spiced veg and beef filling." },
+  { "id": "donut",    "name": "Donut",      "price": 450, "desc": "Soft glazed ring, classic sugar coat." },
+  { "id": "fishroll", "name": "Fish roll",  "price": 700, "desc": "Pastry roll wrapped around flaked, seasoned fish." },
+  { "id": "eggroll",  "name": "Egg roll",   "price": 600, "desc": "Pastry-wrapped boiled egg, a bukka classic." }
+]

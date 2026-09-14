@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beastagent | Snack Delivery</title>
+    <meta
+      name="description"
+      content="Beastagent delivers hot snacks including meatpie, donuts, chinchin, samusa, puff puff, and fish roll."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">B</span>
+          <div>
+            <p class="brand-name">Beastagent</p>
+            <small>Fresh snacks delivered fast</small>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <a href="#menu">Menu</a>
+          <a href="#offers">Offers</a>
+          <a href="#delivery">Delivery</a>
+          <a href="#reviews">Reviews</a>
+        </nav>
+
+        <button class="primary-btn">Order now</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Hot • Fresh • Fast</p>
+            <h1>Your favorite snacks, delivered anytime.</h1>
+            <p class="hero-text">
+              Beastagent brings delicious bites to your home, office, and event.
+              From meatpie and donuts to chinchin, samusa, puff puff, and fish roll,
+              we make every craving easy.
+            </p>
+
+            <div class="hero-actions">
+              <a class="primary-btn" href="#menu">Explore menu</a>
+              <a class="secondary-btn" href="#delivery">Track delivery</a>
+            </div>
+
+            <div class="metrics">
+              <div>
+                <strong>1,200+</strong>
+                <span>Orders served</span>
+              </div>
+              <div>
+                <strong>30 min</strong>
+                <span>Average delivery</span>
+              </div>
+              <div>
+                <strong>4.9/5</strong>
+                <span>Customer rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="card-badge">Today's best seller</div>
+            <div class="snack-visual">
+              <div class="snack-item meatpie">🥟</div>
+              <div class="snack-item donut">🍩</div>
+              <div class="snack-item puff">🍤</div>
+            </div>
+
+            <div class="hero-order-card">
+              <div>
+                <p>Combo box</p>
+                <h3>Family Snack Pack</h3>
+              </div>
+              <div class="price-wrap">
+                <span class="old-price">₦9,500</span>
+                <span class="new-price">₦7,800</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="offers" id="offers">
+        <div class="container offers-grid">
+          <div class="offer-box">
+            <span>🎉</span>
+            <div>
+              <h4>Free delivery</h4>
+              <p>On orders above ₦8,000</p>
+            </div>
+          </div>
+          <div class="offer-box">
+            <span>⚡</span>
+            <div>
+              <h4>Fast prep</h4>
+              <p>Freshly made in under 20 mins</p>
+            </div>
+          </div>
+          <div class="offer-box">
+            <span>⭐</span>
+            <div>
+              <h4>Premium taste</h4>
+              <p>Made with quality ingredients</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu" id="menu">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Our menu</p>
+            <h2>Popular snacks you can order now</h2>
+          </div>
+
+          <div id="menu-grid" class="menu-grid"></div>
+        </div>
+      </section>
+
+      <section class="delivery" id="delivery">
+        <div class="container delivery-grid">
+          <div class="delivery-copy">
+            <p class="eyebrow">Delivery service</p>
+            <h2>Snack delivery made simple</h2>
+            <ul>
+              <li>Fast delivery within your city</li>
+              <li>Freshly packed and sealed</li>
+              <li>Easy reorder from your saved favorites</li>
+              <li>Friendly customer support</li>
+            </ul>
+          </div>
+
+          <div class="order-panel">
+            <div class="order-header">
+              <h3>Your order</h3>
+              <span id="item-count">0 items</span>
+            </div>
+
+            <div id="cart-items" class="cart-items">
+              <div class="empty-cart">
+                <p>Your cart is empty.</p>
+                <small>Add snacks from the menu.</small>
+              </div>
+            </div>
+
+            <div class="order-summary">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <strong id="subtotal">₦0</strong>
+              </div>
+              <div class="summary-row">
+                <span>Delivery</span>
+                <strong id="delivery-fee">₦0</strong>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <strong id="total">₦0</strong>
+              </div>
+            </div>
+
+            <button id="place-order" class="primary-btn full-width">Place order</button>
+            <p id="order-message" class="order-message" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews" id="reviews">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Customer love</p>
+            <h2>What people are saying</h2>
+          </div>
+
+          <div class="review-grid">
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “Beastagent always arrives warm and fresh. The meatpie is my favorite!”
+              </p>
+              <h4>Joy A.</h4>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “The chinchin and puff puff are crunchy and delicious. Ordering is easy.”
+              </p>
+              <h4>Daniel M.</h4>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “Perfect for office snacks. Delivery was quick and the packaging was neat.”
+              </p>
+              <h4>Sarah T.</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <p class="brand-name">Beastagent</p>
+          <small>Fresh snacks, served with care.</small>
+        </div>
+        <div class="footer-links">
+          <a href="#menu">Menu</a>
+          <a href="#delivery">Delivery</a>
+          <a href="#offers">Offers</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
