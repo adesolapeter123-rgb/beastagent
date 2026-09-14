@@ -1,270 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Beastagent | Snack Delivery</title>
-    <meta
-      name="description"
-      content="Beastagent delivers hot snacks including meatpie, donuts, chinchin, samusa, puff puff, and fish roll."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="container nav">
-        <div class="brand">
-          <span class="brand-mark">
-            <img src="./beast-agent-logo.svg" alt="Beastagent logo" />
-          </span>
-          <div>
-            <p class="brand-name">Beastagent</p>
-            <small>Fresh snacks delivered fast</small>
-          </div>
-        </div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeastAgent — snacks, sorted</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1C1512;
+    --charcoal-soft:#2A211C;
+    --cream:#F7EFDF;
+    --cream-dim:#EFE4CD;
+    --chili:#C1442D;
+    --chili-dark:#9A3320;
+    --turmeric:#E8A93B;
+    --leaf:#435C3F;
+    --paper:#FBF7EE;
+    --ink:#1C1512;
+    --ink-60:rgba(28,21,18,0.6);
+    --ink-40:rgba(28,21,18,0.4);
+    --radius-card:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3, .display{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.02;
+  }
+  a{color:inherit;}
+  img,svg{display:block;}
+  button{font-family:inherit; cursor:pointer;}
 
-        <nav class="nav-links">
-          <a href="#menu">Menu</a>
-          <a href="#offers">Offers</a>
-          <a href="#delivery">Delivery</a>
-          <a href="#reviews">Reviews</a>
-        </nav>
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    background:var(--cream);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav-mark{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+    display:flex; align-items:center; gap:8px;
+  }
+  .nav-mark .dot{width:10px; height:10px; background:var(--chili); border-radius:50%; display:inline-block;}
+  .nav-links{display:flex; align-items:center; gap:28px; font-size:0.95rem; font-weight:500;}
+  .nav-links a{text-decoration:none; border-bottom:2px solid transparent; padding-bottom:2px;}
+  .nav-links a:hover{border-bottom-color:var(--chili);}
+  .cart-btn{
+    display:flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--cream);
+    border:none; padding:10px 16px;
+    font-weight:600; font-size:0.9rem;
+  }
+  .cart-btn:hover{background:var(--chili);}
+  .cart-count{
+    background:var(--turmeric); color:var(--ink);
+    min-width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.75rem; font-weight:700;
+  }
 
-        <button class="primary-btn">Order now</button>
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--charcoal);
+    color:var(--cream);
+    padding:80px 28px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:end; padding-bottom:56px;}
+  .hero-eyebrow{
+    color:var(--turmeric); font-weight:600; font-size:0.95rem; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    max-width:11ch;
+  }
+  .hero h1 em{font-style:italic; color:var(--turmeric); font-weight:400;}
+  .hero-sub{
+    color:rgba(247,239,223,0.75);
+    font-size:1.05rem;
+    max-width:38ch;
+    margin-top:22px;
+  }
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--chili); color:var(--cream);
+    border:none; padding:15px 26px;
+    font-weight:700; font-size:1rem;
+    margin-top:30px;
+  }
+  .hero-cta:hover{background:var(--turmeric); color:var(--ink);}
+  .hero-side{
+    border-left:2px solid rgba(247,239,223,0.25);
+    padding-left:32px;
+  }
+  .hero-side p{color:rgba(247,239,223,0.7); font-size:0.95rem; margin-bottom:18px;}
+  .hero-stats{display:flex; flex-direction:column; gap:14px;}
+  .hero-stat{display:flex; justify-content:space-between; border-bottom:1px solid rgba(247,239,223,0.2); padding-bottom:10px;}
+  .hero-stat b{font-family:'Bricolage Grotesque'; font-size:1.4rem; font-weight:700;}
+  .hero-stat span{color:rgba(247,239,223,0.6); font-size:0.85rem;}
+
+  /* marquee ticker */
+  .ticker{
+    border-top:2px solid rgba(247,239,223,0.2);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:14px 0;
+  }
+  .ticker-track{
+    display:inline-block;
+    animation:scroll 26s linear infinite;
+    font-family:'Bricolage Grotesque';
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.02em;
+    color:rgba(247,239,223,0.55);
+  }
+  .ticker-track span{margin:0 18px;}
+  .ticker-track span.hot{color:var(--turmeric);}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+  }
+
+  /* ---------- MENU ---------- */
+  .menu-section{max-width:1120px; margin:0 auto; padding:72px 28px 40px;}
+  .menu-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; gap:24px; flex-wrap:wrap;}
+  .menu-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);}
+  .menu-head p{color:var(--ink-60); max-width:34ch; font-size:0.95rem;}
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:minmax(120px, auto);
+    gap:16px;
+  }
+  .card{
+    background:var(--paper);
+    border:2px solid var(--ink);
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position:relative;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink);}
+  .card.big{grid-column:span 3; grid-row:span 2;}
+  .card.med{grid-column:span 3; grid-row:span 2;}
+  .card.small{grid-column:span 2; grid-row:span 2;}
+
+  .card-icon{width:64px; height:64px; margin-bottom:14px;}
+  .card.big .card-icon, .card.med .card-icon{width:88px; height:88px;}
+  .card-name{font-family:'Bricolage Grotesque'; font-weight:700; font-size:1.15rem; margin-bottom:4px;}
+  .card.big .card-name, .card.med .card-name{font-size:1.5rem;}
+  .card-desc{font-size:0.85rem; color:var(--ink-60); margin-bottom:16px;}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto;}
+  .card-price{font-family:'Bricolage Grotesque'; font-weight:700; font-size:1.1rem;}
+  .qty-control{display:flex; align-items:center; gap:10px; border:2px solid var(--ink); }
+  .qty-control button{background:none; border:none; width:30px; height:30px; font-size:1.1rem; font-weight:700;}
+  .qty-control button:hover{background:var(--turmeric);}
+  .qty-control .qty-val{min-width:16px; text-align:center; font-weight:600; font-size:0.9rem;}
+  .add-btn{
+    background:var(--ink); color:var(--cream); border:none;
+    padding:9px 16px; font-weight:600; font-size:0.85rem;
+  }
+  .add-btn:hover{background:var(--chili);}
+  .badge{
+    position:absolute; top:16px; right:16px;
+    font-size:0.7rem; font-weight:700; text-transform:uppercase;
+    background:var(--turmeric); color:var(--ink); padding:4px 8px;
+  }
+
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-side{border-left:none; border-top:2px solid rgba(247,239,223,0.25); padding-left:0; padding-top:24px;}
+    .menu-grid{grid-template-columns:repeat(2,1fr);}
+    .card.big,.card.med,.card.small{grid-column:span 2; grid-row:span 1;}
+  }
+
+  /* ---------- ABOUT STRIP ---------- */
+  .about{
+    background:var(--leaf); color:var(--cream);
+    padding:56px 28px;
+  }
+  .about-inner{max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .about h3{font-size:1.6rem; margin-bottom:14px;}
+  .about p{color:rgba(247,239,223,0.85); font-size:0.95rem; max-width:44ch;}
+  @media (max-width:760px){.about-inner{grid-template-columns:1fr;}}
+
+  /* ---------- ORDER TICKET (drawer) ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(28,21,18,0.5);
+    opacity:0; pointer-events:none; transition:opacity 0.2s ease; z-index:90;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .ticket{
+    position:fixed; top:0; right:0; height:100%;
+    width:min(400px, 92vw);
+    background:var(--paper);
+    border-left:2px solid var(--ink);
+    z-index:100;
+    transform:translateX(100%);
+    transition:transform 0.25s ease;
+    display:flex; flex-direction:column;
+  }
+  .ticket.open{transform:translateX(0);}
+  .ticket-head{
+    padding:22px 24px; border-bottom:2px dashed var(--ink);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .ticket-head h3{font-size:1.3rem;}
+  .close-btn{background:none; border:2px solid var(--ink); width:32px; height:32px; font-size:1rem;}
+  .close-btn:hover{background:var(--ink); color:var(--cream);}
+  .ticket-body{flex:1; overflow-y:auto; padding:20px 24px;}
+  .ticket-empty{color:var(--ink-40); font-size:0.9rem; padding-top:20px;}
+  .ticket-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 0; border-bottom:1px dotted rgba(28,21,18,0.25);
+    font-size:0.9rem;
+  }
+  .ticket-item-name{font-weight:600;}
+  .ticket-item-meta{color:var(--ink-60); font-size:0.8rem;}
+  .ticket-item-right{display:flex; align-items:center; gap:12px;}
+  .remove-btn{background:none; border:none; color:var(--chili); font-size:0.8rem; font-weight:600; text-decoration:underline;}
+  .ticket-foot{
+    border-top:2px dashed var(--ink); padding:20px 24px;
+  }
+  .checkout-fields{margin-bottom:18px;}
+  .checkout-fields label{
+    display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em;
+    color:var(--ink-60); margin-bottom:14px;
+  }
+  .checkout-fields input{
+    display:block; width:100%; border:none; border-bottom:2px solid var(--ink);
+    background:transparent; padding:6px 2px; margin-top:5px;
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
+  }
+  .checkout-fields input:focus{outline:none; border-color:var(--chili);}
+  .checkout-fields input::placeholder{color:var(--ink-40);}
+  .form-error{
+    color:var(--chili); font-size:0.82rem; font-weight:600;
+    margin:-6px 0 14px; display:none;
+  }
+  .form-error.show{display:block;}
+  .ticket-row{display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:8px; color:var(--ink-60);}
+  .ticket-total{display:flex; justify-content:space-between; font-family:'Bricolage Grotesque'; font-weight:700; font-size:1.3rem; margin:14px 0;}
+  .place-btn{
+    width:100%; background:var(--chili); color:var(--cream); border:none;
+    padding:16px; font-weight:700; font-size:1rem;
+  }
+  .place-btn:hover{background:var(--turmeric); color:var(--ink);}
+  .place-btn:disabled{background:var(--ink-40); cursor:not-allowed;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--charcoal); color:rgba(247,239,223,0.6);
+    padding:40px 28px; text-align:center; font-size:0.85rem;
+  }
+  footer .mark{color:var(--cream); font-family:'Bricolage Grotesque'; font-weight:700; margin-bottom:6px;}
+
+  /* toast */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--cream);
+    padding:14px 22px; font-weight:600; font-size:0.9rem;
+    opacity:0; transition:all 0.25s ease; z-index:200; pointer-events:none;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-mark"><span class="dot"></span>beastagent</div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <button class="cart-btn" id="openTicket">
+      Order ticket <span class="cart-count" id="navCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Lagos snack counter, online</div>
+      <h1>Feed the <em>beast</em> in you.</h1>
+      <p class="hero-sub">Meat pie still warm, puff puff still soft. Order the snacks you grew up on, dropped at your door within the hour.</p>
+      <a href="#menu" class="hero-cta">See the menu →</a>
+    </div>
+    <div class="hero-side">
+      <p>What's on the counter today</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span>Snacks on offer</span><b>7</b></div>
+        <div class="hero-stat"><span>Fried to order</span><b>daily</b></div>
+        <div class="hero-stat"><span>Avg. delivery</span><b>45 min</b></div>
       </div>
-    </header>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="hot">MEAT PIE</span><span>DONUT</span><span>CHIN CHIN</span><span class="hot">SAMOSA</span><span>PUFF PUFF</span><span>FISH ROLL</span><span class="hot">EGG ROLL</span>
+      <span class="hot">MEAT PIE</span><span>DONUT</span><span>CHIN CHIN</span><span class="hot">SAMOSA</span><span>PUFF PUFF</span><span>FISH ROLL</span><span class="hot">EGG ROLL</span>
+    </div>
+  </div>
+</section>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Hot • Fresh • Fast</p>
-            <h1>Your favorite snacks, delivered anytime.</h1>
-            <p class="hero-text">
-              Beastagent brings delicious bites to your home, office, and event.
-              From meatpie and donuts to chinchin, samusa, puff puff, and fish roll,
-              we make every craving easy.
-            </p>
+<section class="menu-section" id="menu">
+  <div class="menu-head">
+    <h2>The counter</h2>
+    <p>Everything's made fresh in small batches — pick what you want, set the quantity, add it to your ticket.</p>
+  </div>
 
-            <div class="hero-actions">
-              <a class="primary-btn" href="#menu">Explore menu</a>
-              <a class="secondary-btn" href="#delivery">Track delivery</a>
-            </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
 
-            <div class="metrics">
-              <div>
-                <strong>1,200+</strong>
-                <span>Orders served</span>
-              </div>
-              <div>
-                <strong>30 min</strong>
-                <span>Average delivery</span>
-              </div>
-              <div>
-                <strong>4.9/5</strong>
-                <span>Customer rating</span>
-              </div>
-            </div>
-          </div>
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <h3>Why BeastAgent</h3>
+      <p>No sad, cold pastries. Every order is fried, baked or rolled after you order it — not sitting in a warmer since morning.</p>
+    </div>
+    <div>
+      <h3>How it works</h3>
+      <p>Build your ticket from the counter, place your order, and we'll have it at your door — still warm, still crisp — usually inside 45 minutes.</p>
+    </div>
+  </div>
+</section>
 
-          <div class="hero-card">
-            <div class="card-badge">Today's best seller</div>
-            <div class="snack-visual">
-              <div class="snack-item meatpie">
-                <img src="./meatpie.jpg" alt="Meat pie" />
-              </div>
-              <div class="snack-item donut">
-                <img src="./donut.jpg" alt="Donut" />
-              </div>
-              <div class="snack-item puff">
-                <img src="./puffpuff.jpg" alt="Puff puff" />
-              </div>
-            </div>
+<footer>
+  <div class="mark">beastagent</div>
+  <div>Snacks, sorted. Lagos &amp; wider FCT delivery.</div>
+</footer>
 
-            <div class="hero-order-card">
-              <div>
-                <p>Combo box</p>
-                <h3>Family Snack Pack</h3>
-              </div>
-              <div class="price-wrap">
-                <span class="old-price">₦9,500</span>
-                <span class="new-price">₦7,800</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<div class="overlay" id="overlay"></div>
+<aside class="ticket" id="ticket">
+  <div class="ticket-head">
+    <h3>Your ticket</h3>
+    <button class="close-btn" id="closeTicket">✕</button>
+  </div>
+  <div class="ticket-body" id="ticketBody"></div>
+  <div class="ticket-foot">
+    <div class="checkout-fields">
+      <label>Name<input type="text" id="custName" placeholder="Full name" autocomplete="name"></label>
+      <label>Phone<input type="tel" id="custPhone" placeholder="080..." autocomplete="tel"></label>
+      <label>Delivery address<input type="text" id="custAddress" placeholder="Street, area, city" autocomplete="street-address"></label>
+    </div>
+    <div class="form-error" id="formError"></div>
+    <div class="ticket-row"><span>Subtotal</span><span id="subtotal">₦0</span></div>
+    <div class="ticket-row"><span>Delivery</span><span id="deliveryFee">₦0</span></div>
+    <div class="ticket-total"><span>Total</span><span id="grandTotal">₦0</span></div>
+    <button class="place-btn" id="placeOrder" disabled>Place order</button>
+  </div>
+</aside>
 
-      <section class="offers" id="offers">
-        <div class="container offers-grid">
-          <div class="offer-box">
-            <span>🎉</span>
-            <div>
-              <h4>Free delivery</h4>
-              <p>On orders above ₦8,000</p>
-            </div>
-          </div>
-          <div class="offer-box">
-            <span>⚡</span>
-            <div>
-              <h4>Fast prep</h4>
-              <p>Freshly made in under 20 mins</p>
-            </div>
-          </div>
-          <div class="offer-box">
-            <span>⭐</span>
-            <div>
-              <h4>Premium taste</h4>
-              <p>Made with quality ingredients</p>
-            </div>
-          </div>
-        </div>
-      </section>
+<div class="toast" id="toast"></div>
 
-      <section class="menu" id="menu">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Our menu</p>
-            <h2>Popular snacks you can order now</h2>
-          </div>
+<script>
+const SNACKS = [
+  {
+    id:'meatpie', name:'Meat pie', price:800, size:'big',
+    desc:'Flaky pastry, seasoned minced beef and diced veg inside.',
+    badge:'Best seller',
+    icon:`<svg viewBox="0 0 100 100"><path d="M10 55 A45 45 0 0 1 90 55 L10 55 Z" fill="#E8A93B" stroke="#1C1512" stroke-width="4" stroke-linejoin="round"/><path d="M10 55 Q50 42 90 55" fill="none" stroke="#1C1512" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="53" r="3" fill="#1C1512"/><circle cx="38" cy="49" r="3" fill="#1C1512"/><circle cx="52" cy="47" r="3" fill="#1C1512"/><circle cx="66" cy="49" r="3" fill="#1C1512"/><circle cx="80" cy="53" r="3" fill="#1C1512"/></svg>`
+  },
+  {
+    id:'puffpuff', name:'Puff puff', price:500, size:'med',
+    desc:'Six sugar-dusted dough balls, fried golden and soft.',
+    badge:'6 pieces',
+    icon:`<svg viewBox="0 0 100 100"><circle cx="34" cy="60" r="24" fill="#E8A93B" stroke="#1C1512" stroke-width="4"/><circle cx="64" cy="66" r="20" fill="#E8A93B" stroke="#1C1512" stroke-width="4"/><circle cx="54" cy="38" r="18" fill="#E8A93B" stroke="#1C1512" stroke-width="4"/><circle cx="30" cy="54" r="2" fill="#1C1512"/><circle cx="58" cy="60" r="2" fill="#1C1512"/><circle cx="50" cy="34" r="2" fill="#1C1512"/><circle cx="40" cy="66" r="2" fill="#1C1512"/></svg>`
+  },
+  {
+    id:'chinchin', name:'Chin chin', price:700, size:'small',
+    desc:'Crunchy fried pastry cubes, lightly sweetened.',
+    icon:`<svg viewBox="0 0 100 100"><rect x="20" y="24" width="22" height="22" fill="#E8A93B" stroke="#1C1512" stroke-width="4" transform="rotate(-8 31 35)"/><rect x="52" y="20" width="22" height="22" fill="#E8A93B" stroke="#1C1512" stroke-width="4" transform="rotate(10 63 31)"/><rect x="18" y="54" width="22" height="22" fill="#E8A93B" stroke="#1C1512" stroke-width="4" transform="rotate(6 29 65)"/><rect x="52" y="56" width="22" height="22" fill="#E8A93B" stroke="#1C1512" stroke-width="4" transform="rotate(-10 63 67)"/></svg>`
+  },
+  {
+    id:'samosa', name:'Samosa', price:600, size:'small',
+    desc:'Crisp triangle pastry, spiced veg and beef filling.',
+    icon:`<img src="./samosa.jpg" alt="Samosa" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`
+  },
+  {
+    id:'donut', name:'Donut', price:450, size:'small',
+    desc:'Soft glazed ring, classic sugar coat.',
+    icon:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#E8A93B" stroke="#1C1512" stroke-width="4"/><circle cx="50" cy="50" r="13" fill="#F7EFDF" stroke="#1C1512" stroke-width="4"/><path d="M22 40 Q50 30 78 40" stroke="#C1442D" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`
+  },
+  {
+    id:'fishroll', name:'Fish roll', price:700, size:'small',
+    desc:'Pastry roll wrapped around flaked, seasoned fish.',
+    icon:`<svg viewBox="0 0 100 100"><rect x="16" y="34" width="68" height="32" rx="16" fill="#E8A93B" stroke="#1C1512" stroke-width="4"/><line x1="34" y1="34" x2="34" y2="66" stroke="#1C1512" stroke-width="3" opacity="0.5"/><line x1="50" y1="34" x2="50" y2="66" stroke="#1C1512" stroke-width="3" opacity="0.5"/><line x1="66" y1="34" x2="66" y2="66" stroke="#1C1512" stroke-width="3" opacity="0.5"/></svg>`
+  },
+  {
+    id:'eggroll', name:'Egg roll', price:600, size:'small',
+    desc:'Pastry-wrapped boiled egg, a bukka classic.',
+    icon:`<img src="./egg roll.jpg" alt="Egg roll" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" />`
+  },
+];
 
-          <div id="menu-grid" class="menu-grid"></div>
-        </div>
-      </section>
+const fmt = n => '₦' + n.toLocaleString('en-NG');
+const cart = {};
+const DELIVERY_FEE = 700;
+// Where the BeastAgent backend is running. Update this if you deploy the
+// API somewhere other than your own machine on the default port.
+const API_BASE = 'http://localhost:3000/api';
 
-      <section class="delivery" id="delivery">
-        <div class="container delivery-grid">
-          <div class="delivery-copy">
-            <p class="eyebrow">Delivery service</p>
-            <h2>Snack delivery made simple</h2>
-            <ul>
-              <li>Fast delivery within your city</li>
-              <li>Freshly packed and sealed</li>
-              <li>Easy reorder from your saved favorites</li>
-              <li>Friendly customer support</li>
-            </ul>
-          </div>
-
-          <div class="order-panel">
-            <div class="order-header">
-              <h3>Your order</h3>
-              <span id="item-count">0 items</span>
-            </div>
-
-            <div id="cart-items" class="cart-items">
-              <div class="empty-cart">
-                <p>Your cart is empty.</p>
-                <small>Add snacks from the menu.</small>
-              </div>
-            </div>
-
-            <div class="order-summary">
-              <div class="summary-row">
-                <span>Subtotal</span>
-                <strong id="subtotal">₦0</strong>
-              </div>
-              <div class="summary-row">
-                <span>Delivery</span>
-                <strong id="delivery-fee">₦0</strong>
-              </div>
-              <div class="summary-row total">
-                <span>Total</span>
-                <strong id="total">₦0</strong>
-              </div>
-            </div>
-
-            <button id="place-order" class="primary-btn full-width">Place order</button>
-            <p id="order-message" class="order-message" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="reviews" id="reviews">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Customer love</p>
-            <h2>What people are saying</h2>
-          </div>
-
-          <div class="review-grid">
-            <div class="review-card">
-              <div class="stars">★★★★★</div>
-              <p>
-                “Beastagent always arrives warm and fresh. The meatpie is my favorite!”
-              </p>
-              <h4>Joy A.</h4>
-            </div>
-            <div class="review-card">
-              <div class="stars">★★★★★</div>
-              <p>
-                “The chinchin and puff puff are crunchy and delicious. Ordering is easy.”
-              </p>
-              <h4>Daniel M.</h4>
-            </div>
-            <div class="review-card">
-              <div class="stars">★★★★★</div>
-              <p>
-                “Perfect for office snacks. Delivery was quick and the packaging was neat.”
-              </p>
-              <h4>Sarah T.</h4>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-content">
-        <div class="footer-brand">
-          <span class="brand-mark footer-logo">
-            <img src="./beast-agent-logo.svg" alt="Beastagent logo" />
-          </span>
-          <div>
-            <p class="brand-name">Beastagent</p>
-            <small>Fresh snacks, served with care.</small>
-          </div>
-        </div>
-
-        <div class="footer-contacts">
-          <p class="contact-label">Contact me</p>
-          <div class="social-links">
-            <a
-              class="social-link whatsapp"
-              href="https://wa.me/2348078244793?text=Hello%20Peter%2C%20I%20want%20to%20chat%20with%20you."
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat on WhatsApp"
-            >
-              <span class="social-icon" aria-hidden="true">💬</span>
-              <span>WhatsApp</span>
-            </a>
-            <a
-              class="social-link instagram"
-              href="https://www.instagram.com/peter___shadow/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit Instagram"
-            >
-              <span class="social-icon" aria-hidden="true">📷</span>
-              <span>Instagram</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <a href="#menu">Menu</a>
-          <a href="#delivery">Delivery</a>
-          <a href="#offers">Offers</a>
-        </div>
+function renderMenu(){
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = SNACKS.map(s => `
+    <div class="card ${s.size}">
+      ${s.badge ? `<span class="badge">${s.badge}</span>` : ''}
+      <div>
+        <div class="card-icon">${s.icon}</div>
+        <div class="card-name">${s.name}</div>
+        <div class="card-desc">${s.desc}</div>
       </div>
-    </footer>
+      <div class="card-foot">
+        <span class="card-price">${fmt(s.price)}</span>
+        <button class="add-btn" data-id="${s.id}">Add</button>
+      </div>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToCart(btn.dataset.id);
+      showToast(`Added ${SNACKS.find(s=>s.id===btn.dataset.id).name} to your ticket`);
+    });
+  });
+}
 
-    <script src="script.js"></script>
-  </body>
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + 1;
+  renderTicket();
+}
+function decFromCart(id){
+  if(!cart[id]) return;
+  cart[id] -= 1;
+  if(cart[id] <= 0) delete cart[id];
+  renderTicket();
+}
+function removeFromCart(id){
+  delete cart[id];
+  renderTicket();
+}
+
+function renderTicket(){
+  const body = document.getElementById('ticketBody');
+  const ids = Object.keys(cart);
+  const navCount = document.getElementById('navCount');
+  const totalItems = ids.reduce((sum,id)=>sum+cart[id],0);
+  navCount.textContent = totalItems;
+
+  if(ids.length === 0){
+    body.innerHTML = `<div class="ticket-empty">Nothing on the ticket yet — add a snack from the counter.</div>`;
+  } else {
+    body.innerHTML = ids.map(id => {
+      const s = SNACKS.find(x=>x.id===id);
+      const qty = cart[id];
+      return `
+        <div class="ticket-item">
+          <div>
+            <div class="ticket-item-name">${s.name}</div>
+            <div class="ticket-item-meta">${fmt(s.price)} each</div>
+          </div>
+          <div class="ticket-item-right">
+            <div class="qty-control">
+              <button data-act="dec" data-id="${id}">−</button>
+              <span class="qty-val">${qty}</span>
+              <button data-act="inc" data-id="${id}">+</button>
+            </div>
+            <button class="remove-btn" data-act="remove" data-id="${id}">Remove</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+    body.querySelectorAll('[data-act]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.dataset.id;
+        if(btn.dataset.act === 'inc') addToCart(id);
+        else if(btn.dataset.act === 'dec') decFromCart(id);
+        else removeFromCart(id);
+      });
+    });
+  }
+
+  const subtotal = ids.reduce((sum,id)=> sum + cart[id]*SNACKS.find(s=>s.id===id).price, 0);
+  const delivery = subtotal > 0 ? DELIVERY_FEE : 0;
+  document.getElementById('subtotal').textContent = fmt(subtotal);
+  document.getElementById('deliveryFee').textContent = fmt(delivery);
+  document.getElementById('grandTotal').textContent = fmt(subtotal + delivery);
+  document.getElementById('placeOrder').disabled = ids.length === 0;
+}
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> toast.classList.remove('show'), 2200);
+}
+
+function openTicket(){
+  document.getElementById('ticket').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function closeTicketFn(){
+  document.getElementById('ticket').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+document.getElementById('openTicket').addEventListener('click', openTicket);
+document.getElementById('closeTicket').addEventListener('click', closeTicketFn);
+document.getElementById('overlay').addEventListener('click', closeTicketFn);
+function showFormError(msg){
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearFormError(){
+  document.getElementById('formError').classList.remove('show');
+}
+
+document.getElementById('placeOrder').addEventListener('click', async () => {
+  clearFormError();
+  const ids = Object.keys(cart);
+  if(ids.length === 0) return;
+
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+  if(!name || !phone || !address){
+    showFormError('Fill in your name, phone and delivery address to place the order.');
+    return;
+  }
+
+  const items = ids.map(id => ({ id, qty: cart[id] }));
+  const placeBtn = document.getElementById('placeOrder');
+  placeBtn.disabled = true;
+  placeBtn.textContent = 'Placing order…';
+
+  try{
+    const res = await fetch(`${API_BASE}/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items, customer: { name, phone, address } })
+    });
+    const data = await res.json();
+
+    if(!res.ok){
+      showFormError(data.error || 'Something went wrong placing your order.');
+      placeBtn.disabled = false;
+      placeBtn.textContent = 'Place order';
+      return;
+    }
+
+    Object.keys(cart).forEach(id => delete cart[id]);
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custAddress').value = '';
+    renderTicket();
+    closeTicketFn();
+    alert(`Order placed 🧾\n\nOrder #${data.id.slice(0,8)}\nTotal: ${fmt(data.total)}\n\nWe'll text ${data.customer.phone} when it's on the way — usually within 45 minutes.`);
+  } catch(err){
+    showFormError("Couldn't reach the kitchen — make sure the backend server is running.");
+  } finally {
+    placeBtn.textContent = 'Place order';
+    placeBtn.disabled = Object.keys(cart).length === 0;
+  }
+});
+
+renderMenu();
+renderTicket();
+</script>
+
+</body>
 </html>
