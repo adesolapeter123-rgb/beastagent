@@ -142,6 +142,38 @@ function addToCart(itemId) {
   renderCart();
 }
 
+async function placeBestSellerOrder() {
+  const payload = {
+    items: [{ id: 'meatpie', qty: 1 }],
+    customer: {
+      name: 'Guest Customer',
+      phone: '08000000000',
+      address: 'Delivery address',
+    },
+  };
+
+  try {
+    const response = await fetch(`${API_BASE}/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Unable to place order.');
+    }
+
+    window.location.href = `invoice.html?orderId=${data.id}`;
+  } catch (error) {
+    orderMessageEl.textContent = error.message || 'Something went wrong while placing the order.';
+    orderMessageEl.style.color = '#d9485f';
+  }
+}
+
 function updateQuantity(itemId, change) {
   const target = cart.find((entry) => entry.id === itemId);
 
@@ -251,6 +283,10 @@ placeOrderBtn.addEventListener('click', async () => {
     orderMessageEl.textContent = error.message || 'Something went wrong while placing the order.';
     orderMessageEl.style.color = '#d9485f';
   }
+});
+
+document.querySelectorAll('.hero-best-seller-btn').forEach((button) => {
+  button.addEventListener('click', placeBestSellerOrder);
 });
 
 renderMenu();
